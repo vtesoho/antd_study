@@ -1,4 +1,6 @@
-import React,{useState,useEffect} from 'react'
+import React,{useState,useReducer,useLayoutEffect,useEffect,useContext,useRef,memo} from 'react'
+
+import MyContext from '../../my-context'
 
 class MyCount extends React.Component{
     state = {
@@ -6,6 +8,7 @@ class MyCount extends React.Component{
     }
 
     componentDidMount(){
+        // this.refs.abc //通过refs获取到指定名的dom对象，这种用法将会在17版本删除掉
         this.interval = setInterval(()=> {
             this.setState({count:this.state.count + 1})
         },1000)
@@ -18,24 +21,78 @@ class MyCount extends React.Component{
     }
 
     render(){
-        return <span>{this.state.count}</span>
+        return <span ref="abc">{this.state.count}</span>
+    }
+}
+
+
+function countReducer(state,action){
+    switch (action.type){
+        case 'add':
+            return state + 1
+        case 'minus':
+            return state - 1
+        default:
+            return state
     }
 }
 
 
 function MyCountFunc(){
-    const [count,setCount] = useState(0)
+    // const [count,setCount] = useState(0)
 
-    useEffect(()=> {
-        const interval = setInterval(()=> {
-            setCount(c => c + 1)
-        },1000)
+    const [count,dispatchCount] = useReducer(countReducer,0)
+    const [name,setName] = useState('jokcy')
+    const [testarray,setTextarray] = useState(['aaa','bbb','ccc'])
 
-        return () => clearInterval(interval)
-    },[])
+    const context = useContext(MyContext)
+
+    const inputRef = useRef()
+
+    // setCount(1)   //直接设置一个新的值
+    // setCount((c) => c+1)  //这里的c是在setCount执行的时候最新的count的值
+
+    // useEffect(()=> {
+    //     const interval = setInterval(()=> {
+    //         // setCount(c => c + 1)
+    //         dispatchCount({type: 'add'})
+    //     },1000)
+
+    //     return () => clearInterval(interval)
+    // },[])
 
 
-    return <span>{count}</span>
+    //useEffect 的第二个参数作用是设置的这个值有变化才会执行第一个参数里面的回调
+    //react官网上建议是只要你在方法里面用到的依赖，就必须放到第二个参数里
+    // 会在dom更新后回执行回调
+    useEffect(()=>{
+        // console.log('effect invoked')
+        console.log(inputRef)
+        return () => console.log('effect deteched')
+        
+    },[name,testarray])
+
+
+
+    // useLayouteffect 会在dom更新前执行回调
+    // 建议少用useLayoutEffect，因为是在dom更新前执行，如果执行时间过长，会影响dom的渲染。
+    useLayoutEffect(()=>{
+        console.log('useLayoutEffect invoked')
+        return () => console.log('useLayoutEffect deteched')
+    },[name,testarray])
+
+
+    return (
+        <div>
+            <input ref={inputRef} value={name} onChange={(e) => setName(e.target.value)} />
+            <button onClick={()=> dispatchCount({type:'add'})}>{count}</button>
+            <p>----------------------</p>
+            <p>{testarray}</p>
+            <button onClick={()=> setTextarray((a) => a[2] = 'ddd')}>修改array</button>
+            <p>----------------------</p>
+            <p>{context}</p>
+        </div>
+    )
 }
 
 export default MyCountFunc
