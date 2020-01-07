@@ -1,11 +1,9 @@
-import React,{useState,useReducer,useLayoutEffect,useEffect,useContext,useRef,memo} from 'react'
+import React from 'react'
 
 function Child () {
-    const [testA,setTestA] = useState('aaa')
+    
     return (
         <div>
-            hooksA
-            {testA}
         </div>
     )
 }

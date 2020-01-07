@@ -1,4 +1,4 @@
-import React,{useState} from 'react'
+import React,{useReducer} from 'react'
 
 function MyCountFunc(){
     const [count,setCount] = useState(0)
