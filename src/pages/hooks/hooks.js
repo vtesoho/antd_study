@@ -2,6 +2,8 @@ import React,{useState,useReducer,useLayoutEffect,useEffect,useContext,useRef,me
 
 import MyContext from '../../my-context'
 
+import Child from './hooksA'
+import {Link} from 'react-router-dom'
 class MyCount extends React.Component{
     state = {
         count: 0
@@ -91,8 +93,22 @@ function MyCountFunc(){
             <button onClick={()=> setTextarray((a) => a[2] = 'ddd')}>修改array</button>
             <p>----------------------</p>
             <p>{context}</p>
+            <p>----------------------</p>
+            <p><Child></Child></p>
+
         </div>
     )
 }
+
+
+
+const HooksRouter = () => {
+    return (
+        <div>
+            
+        </div>
+    )
+}
+
 
 export default MyCountFunc
