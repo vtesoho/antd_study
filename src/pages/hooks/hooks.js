@@ -1,10 +1,14 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import {HashRouter as Router,Route} from "react-router-dom"
 
 import MuseState from './useState'
 import MuseEffect from './useEffect'
 import MuseReducer from './useReducer'
+import MuseContext from './useContext'
+import MuseRef from './useRef'
+
+import MyContext from './my_context'
 
 import TopNav from './nav'
 // class MyCount extends React.Component{
@@ -106,14 +110,26 @@ import TopNav from './nav'
 
 
 const HooksRouter = () => {
+
+    const [testContext,setTestContext] = useState('22222')
+
+
+    
+
+
     return (
         <div>
             <Router>
-                <TopNav></TopNav>
-                <hr />
-                <Route path="/useState" component={MuseState}></Route>
-                <Route path="/useEffect" component={MuseEffect}></Route>
-                <Route path="/useReducer" component={MuseReducer}></Route>
+                <MyContext.Provider value={testContext} >
+                    <TopNav></TopNav>
+                    <hr />
+                    
+                    <Route path="/useState" component={MuseState}></Route>
+                    <Route path="/useEffect" component={MuseEffect}></Route>
+                    <Route path="/useReducer" component={MuseReducer}></Route>
+                    <Route path="/useContext" component={MuseContext}></Route>
+                    <Route path="/useRef" component={MuseRef}></Route>
+                </MyContext.Provider>
             </Router>
         </div>
     )
