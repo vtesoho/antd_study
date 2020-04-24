@@ -2,7 +2,7 @@ import React,{useState, useRef, useEffect} from 'react'
 
 function MyCountFunc(){
     const [count,setCount] = useState(0)
-
+    const mapRef = useRef(null);
     function testRefFun (){
         setCount((c) => c+1)
     }
