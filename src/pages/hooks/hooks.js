@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import {HashRouter as Router,Route} from "react-router-dom"
 
 import MuseState from './useState'
+import MuseStatePrinciple from './useStatePrinciple'
 import MuseEffect from './useEffect'
 import MuseReducer from './useReducer'
 import MuseContext from './useContext'
@@ -125,6 +126,7 @@ const HooksRouter = () => {
                     <hr />
                     
                     <Route path="/useState" component={MuseState}></Route>
+                    <Route path="/useStatePrinciple" component={MuseStatePrinciple}></Route>
                     <Route path="/useEffect" component={MuseEffect}></Route>
                     <Route path="/useReducer" component={MuseReducer}></Route>
                     <Route path="/useContext" component={MuseContext}></Route>

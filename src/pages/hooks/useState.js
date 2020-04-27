@@ -74,35 +74,4 @@ function StateObject(){
 
 
 
-function Counter() {	
-    const [	
-      number,	
-      setNumber	
-    ] = useState(0)	
-    const [	
-      title,	
-      setTitle	
-    ] = useState('随机标题')	
-    return (	
-      <>	
-        <h1>{title}</h1>	
-        <p>{number}</p>	
-        <button	
-          onClick={	
-            () => setNumber(number + 1)	
-          }	
-        >	
-          改数字	
-        </button>	
-        <button	
-          onClick={	
-            () => setTitle(`随机标题${Math.random()}`)	
-          }	
-        >	
-          改标题	
-        </button>	
-      </>	
-    )	
-}
-
-export default Counter
+export default StateObject
