@@ -47,6 +47,7 @@ function StateObject(){
     const objPushAction = ()=>{
         obj.push({name:`push ${Math.random()}`})
         console.log(obj)
+        setobj(obj)
         // refreshAction()
     }
 
@@ -67,6 +68,8 @@ function StateObject(){
             <button onClick={()=>{newObjAction()}}>设置新值</button>
 
             <button onClick={()=>{objPushAction()}}>push</button>
+
+            <button onClick={()=>{refreshAction()}}>刷新</button>
         </div>
     )
 
